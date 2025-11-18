@@ -96,26 +96,10 @@ This happens each time the user asks something.
 ## RAG Flowchart
 
 ```mermaid
-flowchart TD
 
-A[Start: LoadDocument.txt] --> B[1. Preprocessing]
-B --> C[2. Chunking\n 400–800 tokens\n 100–150 overlap]
-C --> D[Store chunks_meta.json]
+![HCL Diagram (1)](https://github.com/user-attachments/assets/8594a0b8-6923-4b16-8979-f3f078b4a03f)
 
-D --> E[3. Embedding\n Sentence-Transformers]
-E --> F[Normalize embedding vectors]
-F --> G[4. Build FAISS Index\n faiss.index]
 
-subgraph QueryFlow [Query-Time Pipeline]
-    H[User Question] --> I[Embed Query]
-    I --> J[FAISS Search\n Top-k Chunks]
-    J --> K[Build Prompt with Retrieved Context]
-    K --> L[Local Llama-3.2-3B-Instruct Inference]
-    L --> M[Answer + Citations]
-end
-
-G --> QueryFlow
-M --> N[End]
 ```
 
 ---
